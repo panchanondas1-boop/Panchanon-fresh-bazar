@@ -1,0 +1,15 @@
+{
+  "name": "Panchanon Fresh Bazar",
+  "short_name": "Fresh Bazar",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#22c55e",
+  "theme_color": "#16a34a",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3081/3081840.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
