@@ -3,111 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Panchanon Fresh Bazar - টাটকা সবজি ও মুদিখানা</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#16a34a">
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
-<style>body{font-family:'Noto Sans Bengali',sans-serif}</style>
+<title>P - Panchanon Fresh Bazar</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#f1f3f6;color:#212121}
+.top{background:#0a4d2e;color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:99}
+.logo{display:flex;gap:10px;align-items:center;font-weight:900;font-size:18px}
+.pbox{width:36px;height:36px;background:#ffeb3b;color:#0a4d2e;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px}
+.owner{width:36px;height:36px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid rgba(255,255,255,.3)}
+.search{margin:10px;background:#fff;border-radius:8px;padding:0 12px;display:flex;align-items:center;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.search input{flex:1;border:none;outline:none;padding:12px 6px;font-size:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px;max-width:800px;margin:0 auto 100px}
+.card{background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e0e0e0;box-shadow:0 1px 4px rgba(0,0,0,.07);display:flex;flex-direction:column}
+.card img{width:100%;height:130px;object-fit:cover;background:#e8f5e9}
+.card b{font-size:14px;padding:8px 10px 0}
+.card span{font-size:12px;color:#666;padding:0 10px}
+.price{color:#0a4d2e;font-weight:900;padding:4px 10px}
+.add{margin:8px 10px 10px;background:#ffeb3b;border:none;padding:9px;border-radius:8px;font-weight:800;font-size:13px}
+.cart{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;padding:12px;display:none;justify-content:space-between;align-items:center;z-index:80}
+.ord{background:#fb641b;color:#fff;border:none;padding:11px 24px;border-radius:6px;font-weight:900}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:200;padding:14px}
+.box{background:#fff;border-radius:14px;padding:16px;width:100%;max-width:400px;max-height:90vh;overflow:auto}
+.inp{width:100%;padding:11px;border:1.5px solid #ddd;border-radius:8px;margin:5px 0;font-size:14px}
+.btn{width:100%;padding:13px;background:#0a4d2e;color:#fff;border:none;border-radius:8px;font-weight:800;margin-top:8px}
+.bY{background:#ffeb3b;color:#000}
+.lab{font-size:11px;font-weight:700;color:#555;margin-top:6px;display:block}
+.adminCard{background:#fff;border:2px solid #0a4d2e;border-radius:12px;padding:10px;display:flex;gap:10px;margin:10px 0}
+</style>
 </head>
-<body class="bg-green-50">
-<header class="bg-green-600 text-white p-4 sticky top-0 z-50 shadow">
-<div class="max-w-6xl mx-auto flex justify-between items-center">
-<h1 class="text-xl font-bold">🥦 Panchanon Fresh Bazar</h1>
-<div class="flex gap-3">
-<a href="admin.html" class="bg-white text-green-700 px-3 py-1 rounded text-sm font-bold">Admin</a>
-<button onclick="showCart()" class="bg-yellow-400 text-black px-3 py-1 rounded font-bold">🛒 <span id="cartCount">0</span></button>
-</div>
-</div>
-</header>
+<body>
+<div class="top"><div class="logo"><div class="pbox">P</div>Panchanon Bazar</div><div style="display:flex;gap:8px;align-items:center"><div id="uShort" style="font-size:12px;display:none"></div><div class="owner" onclick="openOwner()">👑</div></div></div>
+<div class="search"><span>🔍</span><input id="s" placeholder="শাক সবজি খুঁজুন..." oninput="draw()"></div>
+<div class="grid" id="grid"></div>
+<div class="cart" id="cartBar"><div id="cartInfo" style="font-weight:800"></div><button class="ord" onclick="orderNow()">অর্ডার করুন</button></div>
 
-<div class="max-w-6xl mx-auto p-4">
-<div class="bg-white rounded-xl p-4 shadow mb-4 text-center">
-<h2 class="text-2xl font-bold text-green-700">আজকের টাটকা বাজার</h2>
-<p class="text-gray-600">দীঘা ও রামনগরে হোম ডেলিভারি - সকাল 8টা - রাত 9টা</p>
-<a href="tel:1234567890" class="inline-block mt-2 bg-green-600 text-white px-6 py-2 rounded-full">📞 কল করুন</a>
-</div>
+<div class="modal" id="userM" style="display:flex"><div class="box">
+<h3 style="text-align:center">🙏 একবার ডিটেইলস দাও</h3><p style="text-align:center;font-size:12px;color:#666">Flipkart এর মতো - লাইফটাইম সেভ থাকবে</p>
+<label class="lab">নাম *</label><input id="uN" class="inp" placeholder="নাম">
+<label class="lab">ফোন *</label><input id="uPh" class="inp" placeholder="ফোন">
+<div style="display:flex;gap:8px"><div style="flex:1"><label class="lab">গ্রাম</label><input id="uVil" class="inp" placeholder="গ্রাম"></div><div style="flex:1"><label class="lab">পাড়া</label><input id="uPara" class="inp" placeholder="পাড়া"></div></div>
+<div style="display:flex;gap:8px"><div style="flex:1"><label class="lab">থানা</label><input id="uTh" class="inp" placeholder="থানা"></div><div style="flex:1"><label class="lab">জেলা</label><input id="uZil" class="inp" placeholder="জেলা"></div></div>
+<label class="lab">পিন কোড *</label><input id="uPin" class="inp" placeholder="পিন">
+<button class="btn bY" onclick="saveUser()">✅ সেভ - আর কখনো চাইবে না</button>
+</div></div>
 
-<div class="flex gap-2 mb-4 overflow-auto">
-<button onclick="filterCat('all')" class="cat-btn bg-green-600 text-white px-4 py-1 rounded-full whitespace-nowrap">সব</button>
-<button onclick="filterCat('সবজি')" class="cat-btn bg-white px-4 py-1 rounded-full whitespace-nowrap">🥬 সবজি</button>
-<button onclick="filterCat('মুদিখানা')" class="cat-btn bg-white px-4 py-1 rounded-full whitespace-nowrap">🛒 মুদিখানা</button>
-<button onclick="filterCat('ফল')" class="cat-btn bg-white px-4 py-1 rounded-full whitespace-nowrap">🍎 ফল</button>
-</div>
+<div class="modal" id="ownM"><div class="box">
+<h3>👑 মালিক লগইন</h3><p style="font-size:12px;color:#666">Gmail + Password</p>
+<input id="oE" class="inp" value="panchanon@gmail.com" placeholder="Gmail">
+<input id="oP" class="inp" type="password" placeholder="Password - 1234">
+<div style="display:flex;gap:8px;margin-top:8px"><button onclick="closeOwner()" style="flex:1;padding:12px;background:#eee;border:none;border-radius:8px">বন্ধ</button><button onclick="loginOwner()" style="flex:1;padding:12px;background:#0a4d2e;color:#fff;border:none;border-radius:8px;font-weight:800">OK</button></div>
+<p style="font-size:10px;color:#999;margin-top:6px">ডিফল্ট: panchanon@gmail.com / 1234</p>
+</div></div>
 
-<div id="products" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
-</div>
-
-<div id="cartModal" class="fixed inset-0 bg-black/50 hidden z-[60] p-4">
-<div class="bg-white max-w-md mx-auto mt-10 rounded-xl p-4 max-h-[80vh] overflow-auto">
-<div class="flex justify-between items-center mb-3">
-<h3 class="font-bold text-lg">আপনার ঝুড়ি</h3>
-<button onclick="hideCart()" class="text-2xl">×</button>
-</div>
-<div id="cartItems"></div>
-<div class="border-t mt-3 pt-3">
-<p class="flex justify-between font-bold">মোট: <span id="total">0৳</span></p>
-<input id="custName" placeholder="আপনার নাম" class="w-full border p-2 rounded mt-2">
-<input id="custAddr" placeholder="ঠিকানা - দীঘা / রামনগর" class="w-full border p-2 rounded mt-2">
-<button onclick="orderWhatsApp()" class="w-full bg-green-600 text-white py-3 rounded-xl mt-3 font-bold">WhatsApp এ অর্ডার করুন</button>
-</div>
-</div>
+<div id="adminView" style="display:none;max-width:800px;margin:0 auto;padding:10px 10px 100px">
+<div style="background:#fff;padding:12px;border-radius:12px;display:flex;justify-content:space-between"><b>👑 মালিক প্যানেল</b><button onclick="logoutOwner()" style="padding:6px 12px;background:#eee;border:none;border-radius:6px">Logout</button></div>
+<div style="background:#fff;border-radius:12px;padding:12px;margin:10px 0"><h4>📦 অর্ডার - 1 থেকে 10000 <span id="oCnt" style="background:#fb641b;color:#fff;padding:2px 8px;border-radius:10px;font-size:12px">0</span></h4><div id="oList"></div></div>
+<div style="background:#fff;border-radius:12px;padding:12px;margin:10px 0"><h4>➕ নতুন মাল - Unlimited</h4>
+<input id="pN" class="inp" placeholder="নাম - যেমন ওল"><div style="display:flex;gap:8px"><input id="pW" class="inp" placeholder="কোয়ান্টিটি"><input id="pP" class="inp" type="number" placeholder="দাম"></div>
+<div style="border:2px dashed #0a4d2e;background:#f1f8e9;border-radius:10px;padding:10px;text-align:center;margin:8px 0"><b>📸 ফোন থেকে ছবি</b><br><input type="file" id="pF" accept="image/*"><img id="pPrev" style="display:none;width:100%;height:140px;object-fit:cover;border-radius:8px;margin-top:8px"></div>
+<button class="btn" onclick="addP()">✅ সেভ</button></div>
+<div id="aList"></div>
 </div>
 
 <script>
-let products = JSON.parse(localStorage.getItem('pfb_products') || 'null') || [
-{name:"আলু - 1kg",price:28,cat:"সবজি",img:"https://images.unsplash.com/photo-1518977676608-bd36c2ca4f0d?w=300"},
-{name:"পেঁয়াজ - 1kg",price:35,cat:"সবজি",img:"https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=300"},
-{name:"টমেটো - 500g",price:30,cat:"সবজি",img:"https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=300"},
-{name:"আটা - 5kg",price:230,cat:"মুদিখানা",img:"https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=300"},
-{name:"সরিষার তেল - 1L",price:170,cat:"মুদিখানা",img:"https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=300"},
-{name:"আপেল - 1kg",price:180,cat:"ফল",img:"https://images.unsplash.com/photo-1568702846914-96b305d2aa34?w=300"}
+let base=[
+{id:10,name:'ওল',weight:'500gm',price:25,img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300',active:true},
+{id:11,name:'গন্ধরাজ লেবু',weight:'2 pcs',price:15,img:'https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=300',active:true},
+{id:12,name:'কুলেখাড়া শাক',weight:'300 gm',price:30,img:'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300',active:true},
+{id:13,name:'শুশুনি শাক',weight:'300 gm',price:20,img:'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=300',active:true},
+{id:14,name:'ধনে পাতা',weight:'1 bondel',price:20,img:'https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?w=300',active:true},
+{id:15,name:'কলমি শাক',weight:'300 gm',price:15,img:'https://images.unsplash.com/photo-1512621776952-a57141f2eefd?w=300',active:true},
+{id:16,name:'লাল শাক',weight:'500gm',price:15,img:'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=300',active:true},
+{id:17,name:'পালন শাক',weight:'500gm',price:30,img:'https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=300',active:true}
 ];
-let cart=[];
-let curCat='all';
-function save(){localStorage.setItem('pfb_products',JSON.stringify(products))}
-function render(){
- let cont=document.getElementById('products');
- cont.innerHTML='';
- products.filter(p=>curCat=='all'||p.cat==curCat).forEach((p,i)=>{
-  cont.innerHTML+=`<div class="bg-white rounded-xl shadow overflow-hidden"><img src="${p.img}" class="h-28 w-full object-cover"><div class="p-2"><h3 class="font-bold text-sm">${p.name}</h3><p class="text-green-600 font-bold">${p.price}৳</p><p class="text-xs text-gray-500">${p.cat}</p><button onclick="addToCart(${i})" class="w-full mt-2 bg-green-600 text-white py-1 rounded">ঝুড়িতে নিন</button></div></div>`;
+let prods=JSON.parse(localStorage.getItem('pfb_final_v2')||'null')||base;
+let cart=[]; let orders=JSON.parse(localStorage.getItem('pfb_orders_v2')||'[]');
+let user=JSON.parse(localStorage.getItem('pfb_user_v2')||'null');
+let owner=localStorage.getItem('pfb_owner_v2')==='1';
+let tImg='';
+function saveP(){localStorage.setItem('pfb_final_v2',JSON.stringify(prods))}
+function saveO(){localStorage.setItem('pfb_orders_v2',JSON.stringify(orders))}
+document.getElementById('pF').addEventListener('change',e=>{
+ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>{tImg=ev.target.result; const im=document.getElementById('pPrev'); im.src=tImg; im.style.display='block';}; r.readAsDataURL(f);
+});
+function checkUser(){
+ if(!user){document.getElementById('userM').style.display='flex'} else {document.getElementById('userM').style.display='none'; document.getElementById('uShort').innerText=user.name.split(' ')[0]; document.getElementById('uShort').style.display='block';}
+}
+checkUser();
+function saveUser(){
+ const name=document.getElementById('uN').value.trim();
+ const phone=document.getElementById('uPh').value.trim();
+ const vil=document.getElementById('uVil').value.trim();
+ const para=document.getElementById('uPara').value.trim();
+ const th=document.getElementById('uTh').value.trim();
+ const zil=document.getElementById('uZil').value.trim();
+ const pin=document.getElementById('uPin').value.trim();
+ if(!name||!phone||!pin){alert('নাম ফোন পিন দাও');return}
+ user={name,phone,village:vil,para:para,thana:th,zilla:zil,pin:pin};
+ localStorage.setItem('pfb_user_v2',JSON.stringify(user));
+ document.getElementById('userM').style.display='none';
+ document.getElementById('uShort').innerText=name.split(' ')[0]; document.getElementById('uShort').style.display='block';
+ alert('✅ সেভ! লাইফটাইম আর চাইবে না');
+ draw();
+}
+function draw(){
+ const g=document.getElementById('grid'); const q=document.getElementById('s').value.toLowerCase();
+ g.innerHTML='';
+ let list=prods.filter(p=>p.active);
+ if(q) list=list.filter(p=> (p.name+p.weight).toLowerCase().includes(q));
+ list.forEach((p,i)=>{
+  const idx=prods.indexOf(p);
+  g.innerHTML+=`<div class="card"><img src="${p.img}"><b>${p.name}</b><span>${p.weight}</span><div class="price">₹${p.price}</div><button class="add" onclick="addCart(${idx})">🛒 ঝুড়িতে নিন</button></div>`;
  });
 }
-function filterCat(c){
- curCat=c;
- document.querySelectorAll('.cat-btn').forEach(b=>b.className='cat-btn bg-white px-4 py-1 rounded-full whitespace-nowrap');
- event.target.className='cat-btn bg-green-600 text-white px-4 py-1 rounded-full whitespace-nowrap';
- render();
+function addCart(i){
+ if(!user){document.getElementById('userM').style.display='flex';return}
+ cart.push(prods[i]); upd();
 }
-function addToCart(idx){
- let realIdx=products.indexOf(products.filter(p=>curCat=='all'||p.cat==curCat)[idx]);
- if(curCat!='all') realIdx = products.findIndex(p=>p.name==products.filter(p=>curCat=='all'||p.cat==curCat)[idx].name);
- cart.push(products[realIdx]);
- updateCart();
- alert('ঝুড়িতে যোগ হলো!');
+function upd(){
+ const b=document.getElementById('cartBar');
+ if(cart.length==0){b.style.display='none';return}
+ b.style.display='flex';
+ let tot=cart.reduce((s,p)=>s+p.price,0);
+ document.getElementById('cartInfo').innerText=`${cart.length} টা | ₹${tot}`;
 }
-function updateCart(){
- document.getElementById('cartCount').innerText=cart.length;
- let total=cart.reduce((s,p)=>s+p.price,0);
- document.getElementById('total').innerText=total+'৳';
- let html='';
- cart.forEach((p,i)=>{html+=`<div class="flex justify-between py-1 border-b"><span>${p.name}</span><span>${p.price}৳ <button onclick="cart.splice(${i},1);updateCart()" class="text-red-500 ml-2">x</button></span></div>`});
- document.getElementById('cartItems').innerHTML=html||'ঝুড়ি খালি';
-}
-function showCart(){document.getElementById('cartModal').classList.remove('hidden');updateCart()}
-function hideCart(){document.getElementById('cartModal').classList.add('hidden')}
-function orderWhatsApp(){
- let name=document.getElementById('custName').value||'Customer';
- let addr=document.getElementById('custAddr').value||'';
- if(cart.length==0)return alert('ঝুড়ি খালি!');
- let total=cart.reduce((s,p)=>s+p.price,0);
- let msg=`*Panchanon Fresh Bazar - নতুন অর্ডার*%0Aনাম: ${name}%0Aঠিকানা: ${addr}%0A%0A`+cart.map(p=>`- ${p.name} - ${p.price}৳`).join('%0A')+`%0A%0Aমোট: ${total}৳`;
+function orderNow(){
+ if(cart.length==0) return;
+ if(!user){document.getElementById('userM').style.display='flex';return}
+ let tot=cart.reduce((s,p)=>s+p.price,0);
+ let ord={id:Date.now(),customer:{...user},items:[...cart],total:tot,time:new Date().toLocaleString('bn-IN')};
+ orders.unshift(ord); if(orders.length>10000) orders=orders.slice(0,10000); saveO();
+ let msg=`New Order%0AName:${user.name}%0APhone:${user.phone}%0A${user.village} ${user.para} ${user.thana} ${user.zilla} ${user.pin}%0A`; cart.forEach(p=>msg+=`${p.name} ${p.weight} ${p.price}%0A`); msg+=`Total ${tot}`;
  window.open(`https://wa.me/919999999999?text=${msg}`,'_blank');
- cart=[];updateCart();hideCart();
- alert('WhatsApp এ চলে যান, অর্ডার পাঠান!');
+ cart=[]; upd(); alert('✅ অর্ডার হয়ে গেছে '+user.name); if(owner) renderOrders();
 }
-render();updateCart();
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
+function openOwner(){document.getElementById('ownM').style.display='flex'}
+function closeOwner(){document.getElementById('ownM').style.display='none'}
+function loginOwner(){
+ const e=document.getElementById('oE').value; const p=document.getElementById('oP').value;
+ if(e.includes('@') && p.length>=4){owner=true; localStorage.setItem('pfb_owner_v2','1'); closeOwner(); document.getElementById('grid').style.display='none'; document.querySelector('.search').style.display='none'; document.getElementById('adminView').style.display='block'; renderAdmin(); renderOrders();} else alert('Gmail + Password (4 digit) দাও');
+}
+function logoutOwner(){owner=false; localStorage.removeItem('pfb_owner_v2'); document.getElementById('adminView').style.display='none'; document.getElementById('grid').style.display='grid'; document.querySelector('.search').style.display='flex'; draw();}
+function renderAdmin(){
+ const d=document.getElementById('aList'); d.innerHTML=''; prods.forEach((p,i)=>{d.innerHTML+=`<div class="adminCard"><img src="${p.img}" style="width:60px;height:60px;border-radius:8px;object-fit:cover"><div style="flex:1"><b>${i+1}. ${p.name}</b> ${p.active?'🟢ON':'🔴OFF'}<br><small>${p.weight} | ₹${p.price}</small><br><button onclick="tog(${i})" style="padding:4px 8px;background:#ffeb3b;border:none;border-radius:6px;font-size:11px">${p.active?'OFF':'ON'}</button> <button onclick="editP(${i})" style="padding:4px 8px;background:#0a4d2e;color:#fff;border:none;border-radius:6px;font-size:11px">Edit দাম</button> <button onclick="delP(${i})" style="padding:4px 8px;background:#d32f2f;color:#fff;border:none;border-radius:6px;font-size:11px">Del</button></div></div>`});
+}
+function tog(i){prods[i].active=!prods[i].active; saveP(); renderAdmin(); draw();}
+function delP(i){if(confirm('ডিলিট?')){prods.splice(i,1); saveP(); renderAdmin(); draw();}}
+function editP(i){let pr=prompt('নতুন দাম - আজ কত? কাল বদলাতে পারবে',prods[i].price); if(pr){prods[i].price=parseInt(pr); saveP(); renderAdmin(); draw();}}
+function addP(){let n=document.getElementById('pN').value.trim(); let w=document.getElementById('pW').value.trim()||'500gm'; let pr=parseInt(document.getElementById('pP').value); if(!n||!pr){alert('নাম দাম দাও');return} prods.push({id:Date.now(),name:n,weight:w,price:pr,img:tImg||'https://via.placeholder.com/300?text='+encodeURIComponent(n),active:true}); saveP(); document.getElementById('pN').value=''; document.getElementById('pP').value=''; tImg=''; document.getElementById('pPrev').style.display='none'; renderAdmin(); draw(); alert('✅ সেভ');}
+function renderOrders(){let d=document.getElementById('oList'); document.getElementById('oCnt').innerText=orders.length; if(orders.length==0){d.innerHTML='<p style="color:#999;padding:10px">অর্ডার নেই</p>';return} d.innerHTML=''; orders.slice(0,100).forEach((o,i)=>{d.innerHTML+=`<div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:10px;margin:8px 0"><div style="display:flex;justify-content:space-between"><b>#${o.id.toString().slice(-5)} ${o.customer.name}</b><small>${o.time}</small></div><div style="font-size:12px;margin:4px 0">📞${o.customer.phone}<br>📍${o.customer.village} ${o.customer.para} ${o.customer.thana} ${o.customer.zilla} ${o.customer.pin}</div><div style="background:#f5f5f5;padding:6px;border-radius:6px;font-size:12px">${o.items.map(p=>p.name+' ₹'+p.price).join('<br>')}<br><b>Total ₹${o.total}</b></div><div style="display:flex;gap:6px;margin-top:6px"><a href="tel:${o.customer.phone}" style="flex:1;background:#0a4d2e;color:#fff;text-align:center;padding:8px;border-radius:6px;text-decoration:none;font-size:12px">Call</a><button onclick="delO(${i})" style="flex:1;background:#d32f2f;color:#fff;border:none;padding:8px;border-radius:6px;font-size:12px">Delete পুরোনো</button></div></div>`});}
+function delO(i){if(confirm('ডিলিট পুরোনো অর্ডার?')){orders.splice(i,1); saveO(); renderOrders();}}
+draw();
+if(owner){document.getElementById('grid').style.display='none'; document.querySelector('.search').style.display='none'; document.getElementById('adminView').style.display='block'; renderAdmin(); renderOrders();}
 </script>
 </body>
-</html>
+                                                                           </html>
