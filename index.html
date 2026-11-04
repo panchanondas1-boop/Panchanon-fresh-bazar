@@ -3,32 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>P - Panchanon Fresh Bazar</title>
+<title>P - Panchanon Bazar</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a4d2e">
+<link rel="icon" href="p-icon-512.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#f1f3f6;color:#212121}
+body{background:#f1f3f6}
 .top{background:#0a4d2e;color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:99}
-.logo{display:flex;gap:10px;align-items:center;font-weight:900;font-size:18px}
+.logo{display:flex;gap:10px;align-items:center;font-weight:900}
 .pbox{width:36px;height:36px;background:#ffeb3b;color:#0a4d2e;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px}
-.owner{width:36px;height:36px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid rgba(255,255,255,.3)}
-.search{margin:10px;background:#fff;border-radius:8px;padding:0 12px;display:flex;align-items:center;box-shadow:0 1px 2px rgba(0,0,0,.1)}
-.search input{flex:1;border:none;outline:none;padding:12px 6px;font-size:14px}
+.owner{width:36px;height:36px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.search{margin:10px;background:#fff;border-radius:8px;padding:0 12px;display:flex;align-items:center}
+.search input{flex:1;border:none;outline:none;padding:12px 6px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px;max-width:800px;margin:0 auto 100px}
-.card{background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e0e0e0;box-shadow:0 1px 4px rgba(0,0,0,.07);display:flex;flex-direction:column}
-.card img{width:100%;height:130px;object-fit:cover;background:#e8f5e9}
+.card{background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e0e0e0;display:flex;flex-direction:column}
+.card img{width:100%;height:130px;object-fit:cover}
 .card b{font-size:14px;padding:8px 10px 0}
 .card span{font-size:12px;color:#666;padding:0 10px}
 .price{color:#0a4d2e;font-weight:900;padding:4px 10px}
-.add{margin:8px 10px 10px;background:#ffeb3b;border:none;padding:9px;border-radius:8px;font-weight:800;font-size:13px}
+.add{margin:8px 10px 10px;background:#ffeb3b;border:none;padding:9px;border-radius:8px;font-weight:800}
 .cart{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;padding:12px;display:none;justify-content:space-between;align-items:center;z-index:80}
 .ord{background:#fb641b;color:#fff;border:none;padding:11px 24px;border-radius:6px;font-weight:900}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:200;padding:14px}
 .box{background:#fff;border-radius:14px;padding:16px;width:100%;max-width:400px;max-height:90vh;overflow:auto}
-.inp{width:100%;padding:11px;border:1.5px solid #ddd;border-radius:8px;margin:5px 0;font-size:14px}
+.inp{width:100%;padding:11px;border:1.5px solid #ddd;border-radius:8px;margin:5px 0}
 .btn{width:100%;padding:13px;background:#0a4d2e;color:#fff;border:none;border-radius:8px;font-weight:800;margin-top:8px}
 .bY{background:#ffeb3b;color:#000}
 .lab{font-size:11px;font-weight:700;color:#555;margin-top:6px;display:block}
-.adminCard{background:#fff;border:2px solid #0a4d2e;border-radius:12px;padding:10px;display:flex;gap:10px;margin:10px 0}
 </style>
 </head>
 <body>
@@ -38,123 +40,119 @@ body{background:#f1f3f6;color:#212121}
 <div class="cart" id="cartBar"><div id="cartInfo" style="font-weight:800"></div><button class="ord" onclick="orderNow()">অর্ডার করুন</button></div>
 
 <div class="modal" id="userM" style="display:flex"><div class="box">
-<h3 style="text-align:center">🙏 একবার ডিটেইলস দাও</h3><p style="text-align:center;font-size:12px;color:#666">Flipkart এর মতো - লাইফটাইম সেভ থাকবে</p>
-<label class="lab">নাম *</label><input id="uN" class="inp" placeholder="নাম">
-<label class="lab">ফোন *</label><input id="uPh" class="inp" placeholder="ফোন">
-<div style="display:flex;gap:8px"><div style="flex:1"><label class="lab">গ্রাম</label><input id="uVil" class="inp" placeholder="গ্রাম"></div><div style="flex:1"><label class="lab">পাড়া</label><input id="uPara" class="inp" placeholder="পাড়া"></div></div>
-<div style="display:flex;gap:8px"><div style="flex:1"><label class="lab">থানা</label><input id="uTh" class="inp" placeholder="থানা"></div><div style="flex:1"><label class="lab">জেলা</label><input id="uZil" class="inp" placeholder="জেলা"></div></div>
-<label class="lab">পিন কোড *</label><input id="uPin" class="inp" placeholder="পিন">
-<button class="btn bY" onclick="saveUser()">✅ সেভ - আর কখনো চাইবে না</button>
+<h3 style="text-align:center">একবার ডিটেইলস দাও</h3>
+<label class="lab">নাম *</label><input id="uN" class="inp">
+<label class="lab">ফোন *</label><input id="uPh" class="inp">
+<div style="display:flex;gap:8px"><div style="flex:1"><label class="lab">গ্রাম</label><input id="uVil" class="inp"></div><div style="flex:1"><label class="lab">পাড়া</label><input id="uPara" class="inp"></div></div>
+<div style="display:flex;gap:8px"><div style="flex:1"><label class="lab">থানা</label><input id="uTh" class="inp"></div><div style="flex:1"><label class="lab">জেলা</label><input id="uZil" class="inp"></div></div>
+<label class="lab">পিন কোড *</label><input id="uPin" class="inp">
+<button class="btn bY" onclick="saveUser()">সেভ</button>
 </div></div>
 
 <div class="modal" id="ownM"><div class="box">
-<h3>👑 মালিক লগইন</h3><p style="font-size:12px;color:#666">Gmail + Password</p>
-<input id="oE" class="inp" value="panchanon@gmail.com" placeholder="Gmail">
-<input id="oP" class="inp" type="password" placeholder="Password - 1234">
+<h3>মালিক লগইন</h3>
+<p style="font-size:12px;color:#666">শুধু মালিকের জন্য - ঘর ফাঁকা থাকবে</p>
+<input id="oE" class="inp" type="email" placeholder="Gmail">
+<input id="oP" class="inp" type="password" placeholder="Password">
 <div style="display:flex;gap:8px;margin-top:8px"><button onclick="closeOwner()" style="flex:1;padding:12px;background:#eee;border:none;border-radius:8px">বন্ধ</button><button onclick="loginOwner()" style="flex:1;padding:12px;background:#0a4d2e;color:#fff;border:none;border-radius:8px;font-weight:800">OK</button></div>
-<p style="font-size:10px;color:#999;margin-top:6px">ডিফল্ট: panchanon@gmail.com / 1234</p>
 </div></div>
 
 <div id="adminView" style="display:none;max-width:800px;margin:0 auto;padding:10px 10px 100px">
-<div style="background:#fff;padding:12px;border-radius:12px;display:flex;justify-content:space-between"><b>👑 মালিক প্যানেল</b><button onclick="logoutOwner()" style="padding:6px 12px;background:#eee;border:none;border-radius:6px">Logout</button></div>
-<div style="background:#fff;border-radius:12px;padding:12px;margin:10px 0"><h4>📦 অর্ডার - 1 থেকে 10000 <span id="oCnt" style="background:#fb641b;color:#fff;padding:2px 8px;border-radius:10px;font-size:12px">0</span></h4><div id="oList"></div></div>
-<div style="background:#fff;border-radius:12px;padding:12px;margin:10px 0"><h4>➕ নতুন মাল - Unlimited</h4>
-<input id="pN" class="inp" placeholder="নাম - যেমন ওল"><div style="display:flex;gap:8px"><input id="pW" class="inp" placeholder="কোয়ান্টিটি"><input id="pP" class="inp" type="number" placeholder="দাম"></div>
-<div style="border:2px dashed #0a4d2e;background:#f1f8e9;border-radius:10px;padding:10px;text-align:center;margin:8px 0"><b>📸 ফোন থেকে ছবি</b><br><input type="file" id="pF" accept="image/*"><img id="pPrev" style="display:none;width:100%;height:140px;object-fit:cover;border-radius:8px;margin-top:8px"></div>
-<button class="btn" onclick="addP()">✅ সেভ</button></div>
-<div id="aList"></div>
+<div style="background:#fff;padding:12px;border-radius:12px;display:flex;justify-content:space-between"><b>মালিক প্যানেল</b><button onclick="logoutOwner()" style="padding:6px 12px;background:#eee;border:none;border-radius:6px">Logout</button></div>
+<div style="background:#fff;border-radius:12px;padding:12px;margin:10px 0"><h4>অর্ডার 1-10000 <span id="oCnt" style="background:#fb641b;color:#fff;padding:2px 8px;border-radius:10px;font-size:12px">0</span></h4><div id="oList"></div></div>
+<div style="background:#fff;border-radius:12px;padding:12px;margin:10px 0"><h4>নতুন মাল</h4><input id="pN" class="inp" placeholder="নাম"><div style="display:flex;gap:8px"><input id="pW" class="inp" placeholder="কোয়ান্টিটি"><input id="pP" class="inp" type="number" placeholder="দাম"></div><div style="border:2px dashed #0a4d2e;background:#f1f8e9;border-radius:10px;padding:10px;text-align:center;margin:8px 0"><b>ফোন থেকে ছবি</b><br><input type="file" id="pF" accept="image/*"><img id="pPrev" style="display:none;width:100%;height:140px;object-fit:cover;border-radius:8px;margin-top:8px"></div><button class="btn" onclick="addP()">সেভ</button></div><div id="aList"></div>
 </div>
 
 <script>
 let base=[
-{id:10,name:'ওল',weight:'500gm',price:25,img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300',active:true},
-{id:11,name:'গন্ধরাজ লেবু',weight:'2 pcs',price:15,img:'https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=300',active:true},
-{id:12,name:'কুলেখাড়া শাক',weight:'300 gm',price:30,img:'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300',active:true},
-{id:13,name:'শুশুনি শাক',weight:'300 gm',price:20,img:'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=300',active:true},
-{id:14,name:'ধনে পাতা',weight:'1 bondel',price:20,img:'https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?w=300',active:true},
-{id:15,name:'কলমি শাক',weight:'300 gm',price:15,img:'https://images.unsplash.com/photo-1512621776952-a57141f2eefd?w=300',active:true},
-{id:16,name:'লাল শাক',weight:'500gm',price:15,img:'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=300',active:true},
-{id:17,name:'পালন শাক',weight:'500gm',price:30,img:'https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=300',active:true}
+{name:'ওল',weight:'500gm',price:25,img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300',active:true},
+{name:'গন্ধরাজ লেবু',weight:'2 pcs',price:15,img:'https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=300',active:true},
+{name:'কুলেখাড়া শাক',weight:'300 gm',price:30,img:'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300',active:true},
+{name:'শুশুনি শাক',weight:'300 gm',price:20,img:'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=300',active:true},
+{name:'ধনে পাতা',weight:'1 bondel',price:20,img:'https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?w=300',active:true},
+{name:'কলমি শাক',weight:'300 gm',price:15,img:'https://images.unsplash.com/photo-1512621776952-a57141f2eefd?w=300',active:true},
+{name:'লাল শাক',weight:'500gm',price:15,img:'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=300',active:true},
+{name:'পালন শাক',weight:'500gm',price:30,img:'https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=300',active:true}
 ];
 let prods=JSON.parse(localStorage.getItem('pfb_final_v2')||'null')||base;
-let cart=[]; let orders=JSON.parse(localStorage.getItem('pfb_orders_v2')||'[]');
+let cart=[];let orders=JSON.parse(localStorage.getItem('pfb_orders_v2')||'[]');
 let user=JSON.parse(localStorage.getItem('pfb_user_v2')||'null');
 let owner=localStorage.getItem('pfb_owner_v2')==='1';
 let tImg='';
 function saveP(){localStorage.setItem('pfb_final_v2',JSON.stringify(prods))}
 function saveO(){localStorage.setItem('pfb_orders_v2',JSON.stringify(orders))}
-document.getElementById('pF').addEventListener('change',e=>{
- const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>{tImg=ev.target.result; const im=document.getElementById('pPrev'); im.src=tImg; im.style.display='block';}; r.readAsDataURL(f);
-});
-function checkUser(){
- if(!user){document.getElementById('userM').style.display='flex'} else {document.getElementById('userM').style.display='none'; document.getElementById('uShort').innerText=user.name.split(' ')[0]; document.getElementById('uShort').style.display='block';}
-}
+document.getElementById('pF').addEventListener('change',function(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=function(ev){tImg=ev.target.result;let im=document.getElementById('pPrev');im.src=tImg;im.style.display='block';};r.readAsDataURL(f);});
+function checkUser(){if(!user){document.getElementById('userM').style.display='flex'}else{document.getElementById('userM').style.display='none';document.getElementById('uShort').innerText=user.name.split(' ')[0];document.getElementById('uShort').style.display='block';}}
 checkUser();
 function saveUser(){
- const name=document.getElementById('uN').value.trim();
- const phone=document.getElementById('uPh').value.trim();
- const vil=document.getElementById('uVil').value.trim();
- const para=document.getElementById('uPara').value.trim();
- const th=document.getElementById('uTh').value.trim();
- const zil=document.getElementById('uZil').value.trim();
- const pin=document.getElementById('uPin').value.trim();
- if(!name||!phone||!pin){alert('নাম ফোন পিন দাও');return}
- user={name,phone,village:vil,para:para,thana:th,zilla:zil,pin:pin};
- localStorage.setItem('pfb_user_v2',JSON.stringify(user));
- document.getElementById('userM').style.display='none';
- document.getElementById('uShort').innerText=name.split(' ')[0]; document.getElementById('uShort').style.display='block';
- alert('✅ সেভ! লাইফটাইম আর চাইবে না');
- draw();
+let name=document.getElementById('uN').value.trim();
+let phone=document.getElementById('uPh').value.trim();
+let vil=document.getElementById('uVil').value.trim();
+let para=document.getElementById('uPara').value.trim();
+let th=document.getElementById('uTh').value.trim();
+let zil=document.getElementById('uZil').value.trim();
+let pin=document.getElementById('uPin').value.trim();
+if(!name||!phone||!pin){alert('নাম ফোন পিন দাও');return}
+user={name:name,phone:phone,village:vil,para:para,thana:th,zilla:zil,pin:pin};
+localStorage.setItem('pfb_user_v2',JSON.stringify(user));
+document.getElementById('userM').style.display='none';
+document.getElementById('uShort').innerText=name.split(' ')[0];document.getElementById('uShort').style.display='block';
+alert('সেভ!');draw();
 }
 function draw(){
- const g=document.getElementById('grid'); const q=document.getElementById('s').value.toLowerCase();
- g.innerHTML='';
- let list=prods.filter(p=>p.active);
- if(q) list=list.filter(p=> (p.name+p.weight).toLowerCase().includes(q));
- list.forEach((p,i)=>{
-  const idx=prods.indexOf(p);
-  g.innerHTML+=`<div class="card"><img src="${p.img}"><b>${p.name}</b><span>${p.weight}</span><div class="price">₹${p.price}</div><button class="add" onclick="addCart(${idx})">🛒 ঝুড়িতে নিন</button></div>`;
- });
+let g=document.getElementById('grid');let q=document.getElementById('s').value.toLowerCase();g.innerHTML='';
+let list=prods.filter(function(p){return p.active});
+if(q)list=list.filter(function(p){return (p.name+p.weight).toLowerCase().includes(q)});
+list.forEach(function(p){
+let idx=prods.indexOf(p);
+g.innerHTML+="<div class='card'><img src='"+p.img+"'><b>"+p.name+"</b><span>"+p.weight+"</span><div class='price'>Rs"+p.price+"</div><button class='add' onclick='addCart("+idx+")'>ঝুড়িতে নিন</button></div>";
+});
 }
-function addCart(i){
- if(!user){document.getElementById('userM').style.display='flex';return}
- cart.push(prods[i]); upd();
-}
-function upd(){
- const b=document.getElementById('cartBar');
- if(cart.length==0){b.style.display='none';return}
- b.style.display='flex';
- let tot=cart.reduce((s,p)=>s+p.price,0);
- document.getElementById('cartInfo').innerText=`${cart.length} টা | ₹${tot}`;
-}
+function addCart(i){if(!user){document.getElementById('userM').style.display='flex';return}cart.push(prods[i]);upd();}
+function upd(){let b=document.getElementById('cartBar');if(cart.length==0){b.style.display='none';return}b.style.display='flex';let tot=0;for(let i=0;i<cart.length;i++)tot+=cart[i].price;document.getElementById('cartInfo').innerText=cart.length+" টা | Rs"+tot;}
 function orderNow(){
- if(cart.length==0) return;
- if(!user){document.getElementById('userM').style.display='flex';return}
- let tot=cart.reduce((s,p)=>s+p.price,0);
- let ord={id:Date.now(),customer:{...user},items:[...cart],total:tot,time:new Date().toLocaleString('bn-IN')};
- orders.unshift(ord); if(orders.length>10000) orders=orders.slice(0,10000); saveO();
- let msg=`New Order%0AName:${user.name}%0APhone:${user.phone}%0A${user.village} ${user.para} ${user.thana} ${user.zilla} ${user.pin}%0A`; cart.forEach(p=>msg+=`${p.name} ${p.weight} ${p.price}%0A`); msg+=`Total ${tot}`;
- window.open(`https://wa.me/919999999999?text=${msg}`,'_blank');
- cart=[]; upd(); alert('✅ অর্ডার হয়ে গেছে '+user.name); if(owner) renderOrders();
+if(cart.length==0)return;if(!user){document.getElementById('userM').style.display='flex';return}
+let tot=0;for(let i=0;i<cart.length;i++)tot+=cart[i].price;
+let ord={id:Date.now(),customer:user,items:cart.slice(),total:tot,time:new Date().toLocaleString('bn-IN')};
+orders.unshift(ord);if(orders.length>10000)orders=orders.slice(0,10000);saveO();
+let msg="New Order Name:"+user.name+" Phone:"+user.phone+" "+user.village+" "+user.para+" "+user.thana+" "+user.zilla+" "+user.pin+" ";
+for(let i=0;i<cart.length;i++)msg+=cart[i].name+" "+cart[i].weight+" "+cart[i].price+" ";
+msg+="Total "+tot;
+window.open("https://wa.me/919999999999?text="+encodeURIComponent(msg),'_blank');
+cart=[];upd();alert('অর্ডার হয়ে গেছে '+user.name);if(owner)renderOrders();
 }
 function openOwner(){document.getElementById('ownM').style.display='flex'}
 function closeOwner(){document.getElementById('ownM').style.display='none'}
 function loginOwner(){
- const e=document.getElementById('oE').value; const p=document.getElementById('oP').value;
- if(e.includes('@') && p.length>=4){owner=true; localStorage.setItem('pfb_owner_v2','1'); closeOwner(); document.getElementById('grid').style.display='none'; document.querySelector('.search').style.display='none'; document.getElementById('adminView').style.display='block'; renderAdmin(); renderOrders();} else alert('Gmail + Password (4 digit) দাও');
+let e=document.getElementById('oE').value.trim();
+let p=document.getElementById('oP').value.trim();
+if(e==='panchanon@gmail.com' && p==='1234'){
+owner=true;localStorage.setItem('pfb_owner_v2','1');closeOwner();
+document.getElementById('grid').style.display='none';document.querySelector('.search').style.display='none';
+document.getElementById('adminView').style.display='block';renderAdmin();renderOrders();
+}else{alert('ভুল Gmail বা Password!');}
 }
-function logoutOwner(){owner=false; localStorage.removeItem('pfb_owner_v2'); document.getElementById('adminView').style.display='none'; document.getElementById('grid').style.display='grid'; document.querySelector('.search').style.display='flex'; draw();}
+function logoutOwner(){owner=false;localStorage.removeItem('pfb_owner_v2');document.getElementById('adminView').style.display='none';document.getElementById('grid').style.display='grid';document.querySelector('.search').style.display='flex';draw();}
 function renderAdmin(){
- const d=document.getElementById('aList'); d.innerHTML=''; prods.forEach((p,i)=>{d.innerHTML+=`<div class="adminCard"><img src="${p.img}" style="width:60px;height:60px;border-radius:8px;object-fit:cover"><div style="flex:1"><b>${i+1}. ${p.name}</b> ${p.active?'🟢ON':'🔴OFF'}<br><small>${p.weight} | ₹${p.price}</small><br><button onclick="tog(${i})" style="padding:4px 8px;background:#ffeb3b;border:none;border-radius:6px;font-size:11px">${p.active?'OFF':'ON'}</button> <button onclick="editP(${i})" style="padding:4px 8px;background:#0a4d2e;color:#fff;border:none;border-radius:6px;font-size:11px">Edit দাম</button> <button onclick="delP(${i})" style="padding:4px 8px;background:#d32f2f;color:#fff;border:none;border-radius:6px;font-size:11px">Del</button></div></div>`});
-}
-function tog(i){prods[i].active=!prods[i].active; saveP(); renderAdmin(); draw();}
-function delP(i){if(confirm('ডিলিট?')){prods.splice(i,1); saveP(); renderAdmin(); draw();}}
-function editP(i){let pr=prompt('নতুন দাম - আজ কত? কাল বদলাতে পারবে',prods[i].price); if(pr){prods[i].price=parseInt(pr); saveP(); renderAdmin(); draw();}}
-function addP(){let n=document.getElementById('pN').value.trim(); let w=document.getElementById('pW').value.trim()||'500gm'; let pr=parseInt(document.getElementById('pP').value); if(!n||!pr){alert('নাম দাম দাও');return} prods.push({id:Date.now(),name:n,weight:w,price:pr,img:tImg||'https://via.placeholder.com/300?text='+encodeURIComponent(n),active:true}); saveP(); document.getElementById('pN').value=''; document.getElementById('pP').value=''; tImg=''; document.getElementById('pPrev').style.display='none'; renderAdmin(); draw(); alert('✅ সেভ');}
-function renderOrders(){let d=document.getElementById('oList'); document.getElementById('oCnt').innerText=orders.length; if(orders.length==0){d.innerHTML='<p style="color:#999;padding:10px">অর্ডার নেই</p>';return} d.innerHTML=''; orders.slice(0,100).forEach((o,i)=>{d.innerHTML+=`<div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:10px;margin:8px 0"><div style="display:flex;justify-content:space-between"><b>#${o.id.toString().slice(-5)} ${o.customer.name}</b><small>${o.time}</small></div><div style="font-size:12px;margin:4px 0">📞${o.customer.phone}<br>📍${o.customer.village} ${o.customer.para} ${o.customer.thana} ${o.customer.zilla} ${o.customer.pin}</div><div style="background:#f5f5f5;padding:6px;border-radius:6px;font-size:12px">${o.items.map(p=>p.name+' ₹'+p.price).join('<br>')}<br><b>Total ₹${o.total}</b></div><div style="display:flex;gap:6px;margin-top:6px"><a href="tel:${o.customer.phone}" style="flex:1;background:#0a4d2e;color:#fff;text-align:center;padding:8px;border-radius:6px;text-decoration:none;font-size:12px">Call</a><button onclick="delO(${i})" style="flex:1;background:#d32f2f;color:#fff;border:none;padding:8px;border-radius:6px;font-size:12px">Delete পুরোনো</button></div></div>`});}
-function delO(i){if(confirm('ডিলিট পুরোনো অর্ডার?')){orders.splice(i,1); saveO(); renderOrders();}}
+let d=document.getElementById('aList');d.innerHTML='';
+for(let i=0;i<prods.length;i++){let p=prods[i];
+d.innerHTML+="<div style='background:#fff;border:2px solid #0a4d2e;border-radius:12px;padding:10px;display:flex;gap:10px;margin:10px 0'><img src='"+p.img+"' style='width:60px;height:60px;border-radius:8px;object-fit:cover'><div style='flex:1'><b>"+(i+1)+". "+p.name+"</b> "+(p.active?'ON':'OFF')+"<br><small>"+p.weight+" | Rs"+p.price+"</small><br><button onclick='tog("+i+")' style='padding:4px 8px;background:#ffeb3b;border:none;border-radius:6px'>"+(p.active?'OFF':'ON')+"</button> <button onclick='editP("+i+")' style='padding:4px 8px;background:#0a4d2e;color:#fff;border:none;border-radius:6px'>Edit</button> <button onclick='delP("+i+")' style='padding:4px 8px;background:#d32f2f;color:#fff;border:none;border-radius:6px'>Del</button></div></div>";
+}}
+function tog(i){prods[i].active=!prods[i].active;saveP();renderAdmin();draw();}
+function delP(i){if(confirm('ডিলিট?')){prods.splice(i,1);saveP();renderAdmin();draw();}}
+function editP(i){let pr=prompt('নতুন দাম',prods[i].price);if(pr){prods[i].price=parseInt(pr);saveP();renderAdmin();draw();}}
+function addP(){let n=document.getElementById('pN').value.trim();let w=document.getElementById('pW').value.trim()||'500gm';let pr=parseInt(document.getElementById('pP').value);if(!n||!pr){alert('নাম দাম দাও');return}prods.push({name:n,weight:w,price:pr,img:tImg||'https://via.placeholder.com/300?text='+encodeURIComponent(n),active:true});saveP();document.getElementById('pN').value='';document.getElementById('pP').value='';tImg='';document.getElementById('pPrev').style.display='none';renderAdmin();draw();alert('সেভ');}
+function renderOrders(){
+let d=document.getElementById('oList');document.getElementById('oCnt').innerText=orders.length;
+if(orders.length==0){d.innerHTML='<p style=color:#999;padding:10px>অর্ডার নেই</p>';return}
+d.innerHTML='';
+for(let i=0;i<orders.length && i<100;i++){let o=orders[i];
+d.innerHTML+="<div style='background:#fff;border:1px solid #ddd;border-radius:10px;padding:10px;margin:8px 0'><div style='display:flex;justify-content:space-between'><b>#"+o.id.toString().slice(-5)+" "+o.customer.name+"</b><small>"+o.time+"</small></div><div style='font-size:12px;margin:4px 0'>"+o.customer.phone+"<br>"+o.customer.village+" "+o.customer.para+" "+o.customer.thana+" "+o.customer.zilla+" "+o.customer.pin+"</div><div style='background:#f5f5f5;padding:6px;border-radius:6px;font-size:12px'>"+o.items.map(function(p){return p.name+' Rs'+p.price}).join('<br>')+"<br><b>Total Rs"+o.total+"</b></div><div style='display:flex;gap:6px;margin-top:6px'><a href='tel:"+o.customer.phone+"' style='flex:1;background:#0a4d2e;color:#fff;text-align:center;padding:8px;border-radius:6px;text-decoration:none;font-size:12px'>Call</a><button onclick='delO("+i+")' style='flex:1;background:#d32f2f;color:#fff;border:none;padding:8px;border-radius:6px;font-size:12px'>Delete</button></div></div>";
+}}
+function delO(i){if(confirm('ডিলিট?')){orders.splice(i,1);saveO();renderOrders();}}
 draw();
-if(owner){document.getElementById('grid').style.display='none'; document.querySelector('.search').style.display='none'; document.getElementById('adminView').style.display='block'; renderAdmin(); renderOrders();}
+if(owner){document.getElementById('grid').style.display='none';document.querySelector('.search').style.display='none';document.getElementById('adminView').style.display='block';renderAdmin();renderOrders();}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){});}
 </script>
 </body>
-                                                                           </html>
+</html>
